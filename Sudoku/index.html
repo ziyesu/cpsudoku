@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="./js/mat.js"></script>
     <link rel="stylesheet" href="./css/mat.css">
+    <link rel="stylesheet" href="./css/bar.css">
     <script src="./js/jquery/jquery-1.11.1.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link rel="stylesheet" href="./css/input.css">
@@ -15,6 +16,18 @@
     </style>
 </head>
 <body>
+    <!-- sidebar  -->
+    <div class="sidebar">
+        <div class="history">
+            <p class="title">History</p>
+            <div class="list"></div>
+        </div>
+    </div>
+    
+    <div class="toSlide"></div>
+    
+    <!-- sidebar  -->
+    
     <!-- partial:index.partial.html -->
     <div class="Toinput">
         <div class="text-input">
@@ -34,6 +47,28 @@
         </div>
     <div>
     
-    <script src="./js/main.js"></script>
+    <script src="./js/bar.js"></script>
+    <script src="./js/pmat.js"></script>
+    <script>
+        // 当完成一次后的触发
+        function ifSuccInput(){
+            
+            // 写入 bar 中
+            inputSuccHistory.forEach(element => {
+                let data = element.data;
+
+                if(historyData.indexOf(data) ==-1){
+                     // 渲染开始的bar
+                    if (isEmptyBar) {
+                        historyList.html("");
+                    }
+
+                    createHistoryLi(data);
+                    historyData.push(data);
+                }
+            });
+            
+        }
+    </script>
 </body>
 </html>

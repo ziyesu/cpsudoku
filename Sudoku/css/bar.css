@@ -1,0 +1,250 @@
+html,body{
+    margin: 0;
+    padding: 0;
+    background: #313E50;
+
+    font-family: Montserrat;
+}
+
+.sidebar{
+    --slideTime: 0.3s; 
+    --SidebarSize: 100vh;
+    --SideWidth: 250px;
+    --SideRigt: calc(var(--SidebarSize) - var(--SideWidth));
+    position: fixed;
+    z-index: 10;
+    color: #c4c4c4;
+
+    left: calc(var(--SidebarSize)*-1);
+    overflow: hidden;
+
+    background-color: #111;
+    width: var(--SidebarSize);
+    min-width: var(--SideWidth);
+
+    height: var(--SidebarSize);
+
+    border-radius: 0 var(--SidebarSize) var(--SidebarSize) 0;
+    animation:  var(--slideTime) ease-in forwards ;
+
+    box-shadow: 0 1px 0px #000;
+
+    /* test */
+    /* left: calc(var(--SideRigt)*-1);
+    border-radius: 0 0 0 0;
+    box-shadow: 20px 3px 23px -24px #000; */
+}
+
+
+/* =============== 显示历史记录部分 =======================  */
+.sidebar .history{
+    float: right;
+    height: var(--SidebarSize);
+    /* background-color: blanchedalmond; */
+    width: var(--SideWidth);
+    padding: 10px 0 10px 0;
+}
+/* 标题 */
+.sidebar .title{
+    color: #c4c4c4;
+    text-align: center;
+    letter-spacing: 1px;
+    user-select: none;
+}
+
+.sidebar .hisli{
+    --liBottomSize: 2px;
+    /* 省略号代表超出部分 */
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    /* list-style-type: decimal; */
+    padding: 8px 16px 7px;
+    margin-left: -5px;
+    width: calc(var(--SideWidth)-5px);
+    /* background-color: #313E50; */
+    border-bottom: var(--liBottomSize) dashed #32363b;
+
+    position: relative;
+    left: 0;
+    transition: left 0.3s;
+}
+
+.sidebar .hisliShow, .sidebar .hisli:hover{
+    overflow: visible;
+    width: fit-content;
+    background-color: #0c2b56;
+    box-shadow: 2px 8px 16px -8px #000;
+    left: 10px;
+}
+
+.sidebar .hisliShow{
+    border-bottom-color: #08cef3;
+}
+
+
+/* ===================== 时钟小图标 ==================== */
+.sidebar .hisli .op{
+    --borderWeight: 2px;
+    --pointerWeight: calc(var(--borderWeight)/2);
+    --size: 15px;
+    position: absolute;
+    right: -25px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    display: inline-block;
+    width: var(--size);
+    height: var(--size);
+    /* background-color: #69686d; */
+    border-radius: 50%;
+    border: var(--borderWeight) solid #000;
+}
+
+.sidebar .hisli .op::before{
+    right: 0;
+    left: 0;
+    top: calc(15% + var(--pointerWeight)/2 );
+    height: 35%;
+    border-bottom-right-radius: 90px;
+    border-bottom-left-radius: 90px;
+}
+
+.sidebar .hisli .op::after{
+    --xy: calc(var(--pointerWeight)/2 );
+    right: 0;
+    left: 0;
+    top: calc(50% - var(--pointerWeight)/2);
+    height: 40%;
+    transform: rotate(-45deg);
+    transform-origin: var(--xy) var(--xy);
+    border-top-right-radius: 90px;
+    border-top-left-radius: 90px;
+}
+
+.sidebar .hisli .op::after, .sidebar .hisli .op::before{
+    width: calc(var(--pointerWeight));
+    margin: auto;
+    content: '';
+    background-color: #d5d5d5;
+    position: absolute;
+}
+
+
+
+/* .sidebar .hisli::after{
+    position: absolute;
+    background-color: #d5d5d5;
+    width: 3em;
+    height: 4em;
+    top: calc(100% + var(--liBottomSize));
+} */
+
+/* =========== 时间记录 =========== */
+.sidebar .history .details{
+    width: 3em;
+    height: 4em;
+    background-color: red;
+    position: absolute;
+    top: calc(100% + var(--liBottomSize));
+    z-index: 5;
+    right: 0;
+}
+
+
+/* ============= 按钮控制 ==============*/
+.toSlide{
+    --size: 20px;
+    position: fixed;
+    z-index: 11;
+    background-color: #000000;
+
+    width: var(--size);
+    height: var(--size);
+    top: 20px;
+    left: 20px;
+    border-radius: 90px;
+
+    animation:  1s ease-in forwards ;
+}
+
+
+/* ========== 上面使用到的动画 =============== */
+@keyframes sidebarShow{
+    0%{
+        left: calc(var(--SidebarSize)*-1);
+        border-radius: 0 var(--SidebarSize) var(--SidebarSize) 0;
+    }
+    10%{
+        border-radius: 0 var(--SidebarSize) var(--SidebarSize) 0;
+    }
+    90%{
+        border-radius: 0 0 0 0;
+    }
+    99%{
+        overflow: hidden;
+    }
+    100%{
+        left: calc(var(--SideRigt)*-1);
+        border-radius: 0 0 0 0;
+        box-shadow: 20px 3px 23px -24px #000;
+        overflow: visible;
+    }
+}
+
+@keyframes sidebarClose{
+    0%{
+        left: calc(var(--SideRigt)*-1);
+        border-radius: 0 0 0 0;
+        box-shadow: 20px 3px 23px -24px #000;
+    }
+    100%{
+        left: calc(var(--SidebarSize)*-1);
+        border-radius: 0 var(--SidebarSize) var(--SidebarSize) 0;
+        box-shadow: 0 1px 0px #000;
+    }
+}
+
+@keyframes sidebarSwitchOpen{
+    0%{
+        top: 20px;
+        left: 20px;
+        background-color: #000;
+    }
+    60%{
+        top: 20px;
+        left: 222px;
+    }
+    /* 80%{
+        top: 20px;
+        left: 222px;
+    } */
+    100%{
+        top: 7px;
+        left: 222px;
+        background-color: #d51616;
+        border-radius: 0px;
+
+    }
+}
+
+@keyframes sidebarSwitchClose{
+    0%{
+        top: 7px;
+        left: 222px;
+        background-color: #d51616;
+    }
+    60%{
+        top: 7px;
+        left: 20px;
+    }
+    /* 80%{
+        top: 20px;
+        left: 222px;
+    } */
+    100%{
+        top: 20px;
+        left: 20px;
+        background-color: #000;
+    }
+}

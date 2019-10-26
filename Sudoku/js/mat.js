@@ -1,4 +1,8 @@
 let rp = x=> x.replace(/\./g,"0");
+let log = console.log;
+log = (str)=>{
+    return;
+}
 
 const V = { 
     init: (data) => {
@@ -20,7 +24,6 @@ const V = {
                 data = data.split("");
             }
 
-            console.log(data.length);
             if(data.length == 81){
                 // 初始化数组
                 V.format(data);
@@ -607,7 +610,6 @@ const V = {
 }
 
 let v = V;
-const log = console.log;
 
 
 

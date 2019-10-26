@@ -5,6 +5,9 @@ let input = document.querySelector("#input");
 let start = document.querySelector(".start");
 let reback = document.querySelector(".reback");
 
+// 记录成功的历史{data: ,time:}
+let inputSuccHistory = [];
+
 whoShow();
 start.onclick = function () {
     // err
@@ -28,6 +31,7 @@ start.onclick = function () {
     if (str == "d") {
         isInput = false;
         data = demo;
+        str = data.join("").replace(/0/g,".");
     }
 
     if (!isInput) {
@@ -43,6 +47,14 @@ start.onclick = function () {
                     start.style.background = "#E03616";
                 },1000);
             }, 500);
+
+            // 将数据记录下来
+            inputSuccHistory.push({
+                data: str,
+                time: new Date().getTime(),
+            });
+
+            ifSuccInput();
         } else {
             isInput = true;
             input.value = err;

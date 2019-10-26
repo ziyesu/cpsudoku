@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: #353b7f;
+        }
+         .op{
+                --borderWeight: 3em;
+                --pointerWeight: calc(var(--borderWeight)/2);
+                --size: 10em;
+                position: absolute;
+                /* right: -25px; */
+                top: 0;
+                bottom: 0;
+                margin: auto;
+                display: inline-block;
+                width: var(--size);
+                height: var(--size);
+                /* background-color: #69686d; */
+                border-radius: 50%;
+                border: var(--borderWeight) solid #000;
+            }
+        .op::after, .op::before{
+            width: calc(var(--pointerWeight));
+            margin: auto;
+            content: '';
+            background-color: #d5d5d5;
+            position: absolute;
+        }
+            .op::before{
+                right: 0;
+                left: 0;
+                top: calc(15% + var(--pointerWeight)/2 );
+                /* top:15%; */
+                height: 35%;
+                border-bottom-right-radius: 90px;
+                border-bottom-left-radius: 90px;
+            }
+
+            .op::after{
+                --xy: calc(var(--pointerWeight)/2 );
+                right: 0;
+                left: 0;
+                top: calc(50% - var(--pointerWeight)/2);
+                height: 40%;
+                transform: rotate(-45deg);
+                transform-origin: var(--xy) var(--xy);
+                border-top-right-radius: 90px;
+                border-top-left-radius: 90px;
+                background-color: rgba(0, 0, 0, 0.7);
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="op"></div>
+</body>
+</html>
